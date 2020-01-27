@@ -10,19 +10,20 @@ class FakeLogger implements CustomLogger{
 
 }
 
-const replaceInjectedLogger = (logger: CustomLogger) => {
+const replaceInjectedLogger = (logger: CustomLogger):CustomLogger => {
   TestBed.overrideProvider(CustomLogger, {useValue: logger});
-  return TestBed.get(CustomLogger) as FakeLogger;
+  return TestBed.get(CustomLogger) ;
 };
 
 function setupDependencies() {
   TestBed.configureTestingModule({providers: [LoginService, CustomLogger]});
 }
 
-describe('login service', () => { beforeEach(setupDependencies);
+describe('login service', () => {
+  beforeEach(setupDependencies);
   describe('isLoginOK', () => {
     it('calls the logger', () => {
-      const mockLog = replaceInjectedLogger(new FakeLogger());
+      const mockLog = replaceInjectedLogger(new FakeLogger()) as FakeLogger;
       const sut = TestBed.get(LoginService);
 
       sut.isLoginOK('anyuser', 'anypass');

@@ -8,11 +8,19 @@ class FakeLogger implements CustomLogger{
   }
 
 }
+
+const makeLoginService = (logger: CustomLogger = new FakeLogger()): LoginService => {
+  return new LoginService(logger);
+};
+
+
+
+
 describe('login service', () => {
   describe('isLoginOK', () => {
     it('calls the logger', () => {
       const mockLog = new FakeLogger();
-      const sut = new LoginService(mockLog);
+      const sut = makeLoginService(mockLog);
 
       sut.isLoginOK('anyuser', 'anypass');
 
