@@ -1,7 +1,6 @@
 import {CustomLogger} from './custom-logger';
 import {LoginService} from './login.service';
 import {TestBed} from '@angular/core/testing';
-import any = jasmine.any;
 import stringMatching = jasmine.stringMatching;
 
 
